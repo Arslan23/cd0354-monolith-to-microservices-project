@@ -25,7 +25,7 @@ jobs:
     - run: docker tag reverseproxy arslan23/reverseproxy:v1
     - run: docker tag udagram-api-user arslan23/udagram-api-user:v1
     - run: docker tag udagram-api-feed arslan23/udagram-api-feed:v1
-    - run: docker tag udagram-frontend arslan23/udagram-frontend:v1
+    - run: docker tag udagram-frontend:local arslan23/udagram-frontend:v1
     - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
     - run: docker push arslan23/reverseproxy:v1
     - run: docker push arslan23/udagram-api-user:v1
