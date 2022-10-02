@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: feed
+  labels:
+    app: feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: feed
+  template:
+    metadata:
+      labels:
+        app: feed
+    spec:
+      containers:
+      - name: feed
+        image: arslan23/udagram-api-feed:v1
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: env-configmap
+          - secretRef:
+              name: env-db-secret
+        volumeMounts:
+          - mountPath: "/root/.aws/"
+            name: aws-creds
+      volumes:
+        - name: aws-creds
+          configMap:
+            name: aws-creds
+
